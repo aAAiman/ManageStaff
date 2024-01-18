@@ -11,9 +11,11 @@ class DashboardPostController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //return Post::where('user_id', auth()->user()->id)->get();
-        return view('dashboard.posts.index');
+    { 
+        return view('dashboard.posts.index', [
+            'posts' =>Post::where('id', auth()->user()->id)->get()
+        ]);
+            
     }
 
     /**
@@ -21,7 +23,7 @@ class DashboardPostController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.posts.create');
     }
 
     /**
@@ -35,9 +37,11 @@ class DashboardPostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Post $post)
     {
-        //
+        return view('dashboard.posts.show', [
+            'post' => $post
+        ]);
     }
 
     /**
