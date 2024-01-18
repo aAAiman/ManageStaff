@@ -15,11 +15,31 @@
             <a class="nav-link {{ ($title === "Laporan") ? 'active' : '' }}" href="/posts">Laporan</a>
           </li>
         </ul>
-        <ul class="navbar-nav">
-          <li class="nav-item">
-              <a class="nav-link {{ ($title === "login") ? 'active' : '' }}" href="/login">login</a>
-          </li>
-        </ul>
+
+          <ul class="navbar-nav ms-auto">
+              @auth
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{ auth()->user()->name }}
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/dashboard">My Dashboard</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                      <form action="/logout" method="post">
+                        @csrf
+                        <button type="submit" class="dropdown-item"><i class="bibi-box-arrow-right"></i>Logout</button>
+                      </form>
+                    </li>
+                  </ul>
+                </li>
+              @else
+                <li class="nav-item">
+                    <a class="nav-link {{ ($title === "login") ? 'active' : '' }}" href="/login">login</a>
+                </li>
+              @endauth
+          </ul>
+
       </div>
     </div>
   </nav>  
