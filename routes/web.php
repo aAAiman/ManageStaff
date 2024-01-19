@@ -25,15 +25,6 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/about', function () {
-    return view('about', [
-        "title" => "About",
-        "name" => "Reviva Aiman ",
-        "email" => "aimanreviva@gmail.com",
-        "image" => "profil.png"
-    ]);
-}); 
-
 
 
 Route::get('/posts', [PostController::class, 'index']);

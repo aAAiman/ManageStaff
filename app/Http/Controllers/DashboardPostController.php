@@ -13,7 +13,7 @@ class DashboardPostController extends Controller
     public function index()
     { 
         return view('dashboard.posts.index', [
-            'posts' =>Post::where('id', auth()->user()->id)->get()
+            'posts' =>Post::where('user_id', auth()->user()->id)->get()
         ]);
             
     }
@@ -30,9 +30,19 @@ class DashboardPostController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-    }
+{
+    $validatedData = $request->validate([
+        'title' => 'required|max:300',
+        'body' => 'required'
+    ]);
+
+    $user = auth()->user();
+    $validatedData['user_id'] = $user->id;
+
+    Post::create($validatedData);
+
+    return redirect('/dashboard/post')->with('success', 'New Post');
+}
 
     /**
      * Display the specified resource.
