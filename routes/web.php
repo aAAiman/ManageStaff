@@ -27,9 +27,9 @@ Route::get('/', function () {
 
 
 
-Route::get('/posts', [PostController::class, 'index']);
+Route::get('/posts', [PostController::class, 'index'])->middleware('auth');
 // Halaman Single Post
-Route::get('posts/{slug}',[PostController::class, 'show'] );
+Route::get('posts/{slug}',[PostController::class, 'show'] )->middleware('auth');
 
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
@@ -40,5 +40,5 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/dashboard', function () {
     return view('dashboard.index');
 })->middleware('auth');
-
 Route::resource('/dashboard/post', DashboardPostController::class)->middleware('auth');
+Route::delete('/dashboard/post/destroy/{id}', [DashboardPostController::class, 'destroy']);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
 
 class DashboardPostController extends Controller
 {
@@ -73,8 +74,13 @@ class DashboardPostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+        return redirect('/dashboard/post')
+                ->withSuccess('Product is deleted successfully.');
+
+
     }
 }

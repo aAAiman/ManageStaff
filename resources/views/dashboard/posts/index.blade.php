@@ -27,9 +27,13 @@
          <td>{{ $loop->iteration }}</td>
          <td>{{ $post->title }}</td>
          <td>
-           <a href="/dashboard/posts/{{ $post->slug }}" class="badge bg-info"><span data-feather="eye"></span></a>
-           <a href="/dashboard/posts/{{ $post->id }}" class="badge bg-warning"><span data-feather="edit-2"></span></a>
-           <a href="/dashboard/posts/{{ $post->id }}" class="badge bg-danger"><span data-feather="trash-2"></span></a>
+           <a href="post/show/{{ $post->id }}" class="badge bg-info"><span data-feather="eye"></span></a>
+           <a href="post/edit/{{ $post->id }}" class="badge bg-warning"><span data-feather="edit-2"></span></a>
+           <form action="post/destroy/{{ $post->id }}" method="post" method="POST" class="d-inline">
+            @method('DELETE')
+            @csrf
+            <button class="badge bg-danger border-0" type="submit" onclick="return confirm('Ingin Menghapus Post ?')"><span data-feather="trash-2"></span></button>
+          </form>
           </td> 
        </tr>
         @endforeach
