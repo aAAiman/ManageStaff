@@ -50,25 +50,27 @@ class DashboardPostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('dashboard.posts.show', [
-            'post' => $post
-        ]);
+        return $post;
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $post = Post::findorfail($id);
+        return view('dashboard.posts.edit', compact('post'));
     }
+    
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        $post = Post::findorfail($id);
+        $post->update($request->all());
+        return redirect('/dashboard/post')->with('success', 'New Post');
     }
 
     /**

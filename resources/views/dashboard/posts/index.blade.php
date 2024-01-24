@@ -27,8 +27,8 @@
          <td>{{ $loop->iteration }}</td>
          <td>{{ $post->title }}</td>
          <td>
-           <a href="post/show/{{ $post->id }}" class="badge bg-info"><span data-feather="eye"></span></a>
-           <a href="post/edit/{{ $post->id }}" class="badge bg-warning"><span data-feather="edit-2"></span></a>
+           <a href="dashboard/post/{{ $post->id }}" class="badge bg-info"><span data-feather="eye"></span></a>
+           <a href="/dashboard/post/{{ $post->id }}/edit" class="badge bg-warning"><span data-feather="edit-2"></span></a>
            <form action="post/destroy/{{ $post->id }}" method="post" method="POST" class="d-inline">
             @method('DELETE')
             @csrf
