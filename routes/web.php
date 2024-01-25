@@ -4,8 +4,9 @@ use App\Models\post;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\DashboardPostController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\DashboardPostController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -42,3 +43,4 @@ Route::get('/dashboard', function () {
 })->middleware('auth');
 Route::resource('/dashboard/post', DashboardPostController::class)->middleware('auth');
 Route::delete('/dashboard/post/destroy/{id}', [DashboardPostController::class, 'destroy']);
+Route::get('/dashboard/inbox', [DashboardPostController::class, 'inbox'])->name('dashboard.inbox');

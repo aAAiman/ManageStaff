@@ -48,10 +48,15 @@ class DashboardPostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show($id)
     {
-        return $post;
+        $post = Post::join('users', 'posts.user_id', '=', 'users.id')
+                    ->select('posts.*', 'users.name')
+                    ->where('posts.id', '=', $id )
+                    ->first();
+        return view('dashboard.posts.show', ['post' => $post]);
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -84,5 +89,12 @@ class DashboardPostController extends Controller
                 ->withSuccess('Product is deleted successfully.');
 
 
+    }
+
+
+
+    public function inbox(Request $request)
+    {
+        return view('dashboard.inbox');
     }
 }

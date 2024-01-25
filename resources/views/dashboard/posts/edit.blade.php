@@ -6,8 +6,9 @@
   </div>
 
   <div class="col-lg-8">
-      <form method="POST" action="/dashboard/post">
+      <form method="POST" action="/dashboard/post/{{ $post->id }}">
         @csrf
+        @method('PUT')
         <div class="mb-3">
           <label for="title" class="form-label">Title</label>
           <input type="text" class="form-control" id="title" name="title" value="{{ $post->title }}">
@@ -16,7 +17,7 @@
           <label for="body" class="form-label">Body</label>
           <input type="text" class="form-control" id="body" name="body" value="{{ $post->body}}">
         </div>
-        <button type="submit" class="btn btn-primary">Post</button>
+        <button type="submit" class="btn btn-primary">Update</button>
       </form>
   </div>
 @endsection
