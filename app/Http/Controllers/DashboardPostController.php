@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class DashboardPostController extends Controller
 {
@@ -24,7 +25,24 @@ class DashboardPostController extends Controller
      */
     public function create()
     {
+        $user = auth()->user();
+        
+        $post = Post::where([
+            ['user_id', '=', auth()->user()->id],
+            ['created_at', '=', Carbon::today()] 
+        ]);
+        
+        if ($post) {
+            return redirect()->route('post.index')->with('error', 'Kamu Sudah membuat laporan hari ini!');
+        }
+        
         return view('dashboard.posts.create');
+        
+
+
+
+
+
     }
 
     /**
@@ -90,11 +108,13 @@ class DashboardPostController extends Controller
 
 
     }
-
-
-
-    public function inbox(Request $request)
+    public function inbox()
     {
-        return view('dashboard.inbox');
+        
+        $posts = Post::join('users', 'posts.user_id', '=', 'users.id')
+                ->select('posts.*', 'users.role')
+                ->where('users.role', '=', auth()->user()->role)
+                ->get();
+        return view('dashboard.inbox', ['posts' => $posts]);
     }
 }

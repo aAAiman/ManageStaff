@@ -8,6 +8,7 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardPostController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Middleware\ROle;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,4 +44,7 @@ Route::get('/dashboard', function () {
 })->middleware('auth');
 Route::resource('/dashboard/post', DashboardPostController::class)->middleware('auth');
 Route::delete('/dashboard/post/destroy/{id}', [DashboardPostController::class, 'destroy']);
+// Route::middleware(['role'])->group(function () {
+//     Route::get('/dashboard/inbox', [DashboardPostController::class, 'inbox'])->name('dashboard.inbox');
+// });
 Route::get('/dashboard/inbox', [DashboardPostController::class, 'inbox'])->name('dashboard.inbox');

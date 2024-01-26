@@ -3,37 +3,35 @@
 @section('container')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Laporan</h1>
-  </div>
+</div>
 
-  @if(session()->has('succes'))
+@if(session()->has('success'))
     <div class="alert alert-success" role="alert">
-      {{ session('succes') }}
+        {{ session('success') }}
     </div>
-  @endif
+@endif
 
-  <div class="table-responsive col-lg-8">
+<div class="table-responsive col-lg-8">
     <table class="table table-striped table-sm">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Title</th>
-          <th scope="col">status</th>
-          <th scope="col">pengirim</th>
-        </tr>
-      </thead>
-      <tbody>
-        @foreach ($posts as $post)    
-        <tr> 
-         <td>{{ $loop->iteration }}</td>
-         <td>{{ $post->title }}</td>
-         <td>
-           <a href="/dashboard/post/{{ $post->id }}" class="badge bg-info"><span data-feather="eye"></span></a>
-          </form>
-          </td> 
-       </tr>
-        @endforeach
-      </tbody>
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">pengirim</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($posts as $post)    
+            <tr> 
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $post->title }}</td>
+                <td>
+                    <a href="/dashboard/post/{{ $post->id }}" class="badge bg-info"><span data-feather="eye"></span></a>
+                </td> 
+            </tr>
+            @endforeach
+        </tbody>
     </table>
-  </div>
+</div>
 
 @endsection

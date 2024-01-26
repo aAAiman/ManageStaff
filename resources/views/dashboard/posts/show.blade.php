@@ -16,4 +16,6 @@
             </div>
         </div>
     </div>
-@endsection
+    <a href="/dashboard/post">Back To Posts</a>
+    
+    @endsection

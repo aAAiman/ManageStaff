@@ -10,6 +10,12 @@
       {{ session('succes') }}
     </div>
   @endif
+  
+  @if(session()->has('error'))
+  <div class="alert alert-danger" role="alert">
+    {{ session('error') }}
+  </div>
+  @endif
 
   <div class="table-responsive col-lg-8">
     <a href="/dashboard/post/create" class="btn btn-primary mb-3">Create</a>
